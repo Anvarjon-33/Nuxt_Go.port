@@ -2,7 +2,8 @@ export const gl = defineStore("global_POST_data", {
     state: () => ({
         data: {} as any,
         params: {
-            method: 'POST' as any,
+            method: 'post',
+            url: "/"
         }
     }),
     actions: {

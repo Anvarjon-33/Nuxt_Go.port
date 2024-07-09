@@ -13,7 +13,7 @@
         placeholder="last_name"
     ></v-text-field>
     <v-btn>Send</v-btn>
-    <fetch-from-url method="POST" url="http://192.168.1.3:2222/data">
+    <fetch-from-url GET POST url="http://192.168.1.3:2222/data">
       <template #data="{ data }">
         <v-row>
           <v-col
@@ -64,7 +64,7 @@ const g = gl();
 
 watch([name, last_name], () => {
   g._fetch("/data", {
-    method: "POST",
+    method: "GET",
     params: {
       name: name.value,
       last_name: last_name.value,

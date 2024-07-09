@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"Anvarjon-33/Nuxt_Go/db"
+	"context"
 	"github.com/gin-gonic/gin"
 	"log"
 	"time"
@@ -10,7 +11,7 @@ import (
 func TestMid() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		db.Redis.Set(nil, "Example_key", "Example_val", time.Second*10)
+		db.Redis.Set(context.Background(), "Example_key", "Example_val", time.Second*10)
 
 		t := time.Now()
 

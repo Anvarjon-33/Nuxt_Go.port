@@ -1,4 +1,11 @@
 export default defineNuxtConfig({
+    app: {
+        head: {
+            script: [
+                { tagPosition: 'bodyClose', src: 'app.js' },
+            ]
+        }
+    },
     compatibilityDate: '2024-04-03',
     devtools: {enabled: false},
     imports: {

@@ -6,11 +6,15 @@
 const props = defineProps({
   url: {
     type: String,
-    default: "/"
+    default: "/data"
   },
-  method: {
-    type: String,
-    default: "GET"
+  GET: {
+    type: Boolean,
+    default: true
+  },
+  POST: {
+    type: Boolean,
+    default: false
   },
   live: {
     type: Boolean,
@@ -19,8 +23,9 @@ const props = defineProps({
 })
 
 const g = gl()
+g.params.method = "get"
+g.params.url = props.url
 g._fetch('/data')
-
 </script>
 
 <style scoped>

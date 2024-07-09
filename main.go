@@ -3,7 +3,7 @@ package main
 import (
 	"Anvarjon-33/Nuxt_Go/api/auth"
 	"Anvarjon-33/Nuxt_Go/db"
-	mid "Anvarjon-33/Nuxt_Go/middleware"
+	"Anvarjon-33/Nuxt_Go/routes"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -18,7 +18,6 @@ var (
 )
 
 func init() {
-
 	secret = os.Getenv("SECRET")
 	mode = os.Getenv("MODE")
 	par = make(chan map[string]string, 1)
@@ -29,7 +28,10 @@ func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	r.POST("/data", mid.TestMid(), func(c *gin.Context) {
+	r.GET("/csrf-header", routes.Auth())
+
+	r.GET("/data", func(c *gin.Context) {
+
 		var res = make(map[string]string)
 		params := c.Request.URL.Query()
 		for key, val := range params {
@@ -63,7 +65,7 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, HEAD")
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
 			return
