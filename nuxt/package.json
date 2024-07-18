@@ -10,7 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@hebilicious/authjs-nuxt": "^0.3.5",
+    "@pinia/nuxt": "^0.5.1",
+    "@sidebase/nuxt-auth": "^0.8.0",
     "nuxt": "^3.12.3",
-    "vue": "latest"
+    "vue": "latest",
+    "vuetify-nuxt-module": "^0.15.1"
   }
 }
