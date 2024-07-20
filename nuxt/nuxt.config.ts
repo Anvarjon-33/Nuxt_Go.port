@@ -8,7 +8,8 @@ export default defineNuxtConfig({
         globalAppMiddleware: true,
     },
     devServer: {
-        url: "http://localhost:3000"
+        url: "http://localhost:3000",
+        host: "192.168.1.3"
     },
     runtimeConfig: {
         google_secret: process.env.NUXT_GOOGLE_SECRET,

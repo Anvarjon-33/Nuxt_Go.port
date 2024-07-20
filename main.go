@@ -1,12 +1,16 @@
 package main
 
 import (
-	"net/http"
-
+	"Anvarjon-33/Nuxt_Go.port/db"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"time"
 )
 
 func main() {
+	start := time.Now()
+	fmt.Println("time for tasks: ", start.Sub(time.Now()))
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 	r.POST("/login", func(c *gin.Context) {
@@ -14,12 +18,16 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.POST("/", func(c *gin.Context) {
+	r.GET("/", func(c *gin.Context) {
+		res, err := db.GetUser()
+		if err != nil {
+			panic(err)
+		}
 		c.JSON(http.StatusOK, gin.H{
-			"message": "Main",
+			"message": res,
 		})
 	})
-	r.Run("192.168.1.3:8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r.Run("192.168.1.3:2222") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
 func CORSMiddleware() gin.HandlerFunc {
@@ -33,7 +41,6 @@ func CORSMiddleware() gin.HandlerFunc {
 			c.AbortWithStatus(204)
 			return
 		}
-
 		c.Next()
 	}
 }
