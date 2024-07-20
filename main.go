@@ -10,15 +10,16 @@ import (
 
 func main() {
 	start := time.Now()
+	res, _ := db.GetUser()
 	fmt.Println("time for tasks: ", start.Sub(time.Now()))
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 	r.POST("/login", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
+			"message": res,
 		})
 	})
-	r.GET("/", func(c *gin.Context) {
+	r.POST("/", func(c *gin.Context) {
 		res, err := db.GetUser()
 		if err != nil {
 			panic(err)

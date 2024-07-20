@@ -3,10 +3,12 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     devtools: {enabled: false},
     imports: {autoImport: true},
-    modules: ["vuetify-nuxt-module", "@sidebase/nuxt-auth", ["@pinia/nuxt", {}]],
-    auth: {
-        globalAppMiddleware: true,
-    },
+    modules: [
+        "vuetify-nuxt-module",
+        // "@sidebase/nuxt-auth",
+        "@pinia/nuxt"
+    ],
+    // auth: { globalAppMiddleware: true, },
     devServer: {
         url: "http://localhost:3000",
         host: "192.168.1.3"
