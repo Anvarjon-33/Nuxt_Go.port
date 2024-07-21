@@ -8,30 +8,40 @@ import (
 	"strings"
 )
 
-var par = make(chan map[string]string)
+var par = make(chan map[string]string, 1)
 
 func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	r.GET("/data", func(c *gin.Context) {
+	//r.GET("/data", func(c *gin.Context) {
+	//	var res = make(map[string]string)
+	//	params := c.Request.URL.Query()
+	//	for key, val := range params {
+	//		res[key] = strings.Join(val, "")
+	//	}
+	//	par <- res
+	//})
+
+	r.POST("/data", func(c *gin.Context) {
 		var res = make(map[string]string)
 		params := c.Request.URL.Query()
 		for key, val := range params {
 			res[key] = strings.Join(val, "")
+			res[key] = strings.Trim(res[key], " ")
+			if res[key] != "" {
+				par <- res
+			}
 		}
-		par <- res
-	})
-
-	r.POST("/data", func(c *gin.Context) {
 		select {
 		case p := <-par:
-			fmt.Println(p)
+			fmt.Println(p["name"])
 			res, _ := db.GetUser(p["name"])
 			c.JSON(http.StatusOK, gin.H{
 				"message": res,
 			})
 		default:
+			fmt.Println("Default Response !")
 			res, _ := db.GetUser_()
 			c.JSON(http.StatusOK, gin.H{
 				"message": res,
