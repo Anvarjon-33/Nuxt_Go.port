@@ -43,9 +43,16 @@
 <script lang="ts" setup>
 const name = ref()
 const last_name = ref()
+const g = gl()
 
 watch([name, last_name], () => {
-  g._fetch('/data', {method: 'get'})
+  g._fetch('/data', {
+    method: "POST",
+    params: {
+      name: name.value,
+      last_name: last_name.value
+    }
+  })
 })
 </script>
 
