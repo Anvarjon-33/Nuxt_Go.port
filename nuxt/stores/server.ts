@@ -1,10 +1,17 @@
-export const pin = defineStore("testing", {
+export const gl = defineStore("global_POST_data", {
     state: () => ({
-        data: "Example text"
+        data: {},
+        params: {
+            method: 'POST' as any,
+        }
     }),
     actions: {
-        async get_data() {
+        async _fetch(url: string, _params = false as {}) {
+            if (url.slice(0, 4) != 'http') {
+                url = "http://192.168.1.3:2222" + url;
+            }
+            this.data = await $fetch(url, _params || this.params)
         }
     },
-    getters: {},
+    getters: {}
 })

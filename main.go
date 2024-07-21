@@ -2,6 +2,7 @@ package main
 
 import (
 	"Anvarjon-33/Nuxt_Go.port/db"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
@@ -25,8 +26,8 @@ func main() {
 	r.POST("/data", func(c *gin.Context) {
 		select {
 		case p := <-par:
-			_ = p
-			res, _ := db.GetUser_()
+			fmt.Println(p)
+			res, _ := db.GetUser(p["name"])
 			c.JSON(http.StatusOK, gin.H{
 				"message": res,
 			})

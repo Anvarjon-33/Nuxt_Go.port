@@ -22,7 +22,7 @@ func GetUser(wild string) ([]classic.Customers, error) {
 	if err != nil {
 		panic(err)
 	}
-	rows, err := db.Query("select customerName, contactLastName, contactFirstName from customers where customerName like %an%;")
+	rows, err := db.Query("select customerName, contactLastName, contactFirstName from customers where customerName like '%an';")
 	if err != nil {
 		panic(err)
 	}
@@ -41,7 +41,7 @@ func GetUser_() ([]classic.Customers, error) {
 	if err != nil {
 		panic(err)
 	}
-	rows, err := db.Query("select customerName, contactLastName, contactFirstName from customers; ")
+	rows, err := db.Query("select customerName, contactLastName, contactFirstName from customers;")
 	if err != nil {
 		panic(err)
 	}

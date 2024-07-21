@@ -44,15 +44,8 @@
 const name = ref()
 const last_name = ref()
 
-watch([name, last_name], async () => {
-  const data = await $fetch('http://192.168.1.3:2222/data', {
-    method: 'GET',
-    params: {
-      name: name.value,
-      last_name: last_name.value
-    }
-  })
-  console.log(data)
+watch([name, last_name], () => {
+  g._fetch('/data', {method: 'get'})
 })
 </script>
 

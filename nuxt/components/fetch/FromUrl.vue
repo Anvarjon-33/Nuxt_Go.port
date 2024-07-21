@@ -1,5 +1,5 @@
 <template>
-  <slot :data name="data"></slot>
+  <slot :data="g.data" name="data"></slot>
 </template>
 
 <script lang="ts" setup>
@@ -18,11 +18,8 @@ const props = defineProps({
   }
 })
 
-const data: any = await $fetch(props.url, {
-  method: props.method as any
-})
-
-console.log(data.message)
+const g = gl()
+g._fetch('/data')
 
 </script>
 
