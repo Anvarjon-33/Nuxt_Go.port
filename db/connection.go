@@ -16,7 +16,26 @@ func init() {
 	}
 }
 
-func GetUser() ([]classic.Customers, error) {
+func GetUser(wild string) ([]classic.Customers, error) {
+	var res []classic.Customers
+	db, err := sql.Open("mysql", env.Get("DB_URL", ""))
+	if err != nil {
+		panic(err)
+	}
+	rows, err := db.Query("select customerName, contactLastName, contactFirstName from customers where customerName like %an%;")
+	if err != nil {
+		panic(err)
+	}
+	for rows.Next() {
+		var t classic.Customers
+		if err := rows.Scan(&t.ContactLastName, &t.CustomerName, &t.ContactFirstName); err != nil {
+			panic(err)
+		}
+		res = append(res, t)
+	}
+	return res, err
+}
+func GetUser_() ([]classic.Customers, error) {
 	var res []classic.Customers
 	db, err := sql.Open("mysql", env.Get("DB_URL", ""))
 	if err != nil {

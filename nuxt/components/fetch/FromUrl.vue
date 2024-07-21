@@ -1,5 +1,5 @@
 <template>
-  <slot :data="data['message']"></slot>
+  <slot :data name="data"></slot>
 </template>
 
 <script lang="ts" setup>
@@ -10,7 +10,7 @@ const props = defineProps({
   },
   method: {
     type: String,
-    default: "POST"
+    default: "GET"
   },
   live: {
     type: Boolean,
@@ -18,10 +18,12 @@ const props = defineProps({
   }
 })
 
-const data = await $fetch(props.url, {
+const data: any = await $fetch(props.url, {
   method: props.method as any
 })
-console.log(data)
+
+console.log(data.message)
+
 </script>
 
 <style scoped>

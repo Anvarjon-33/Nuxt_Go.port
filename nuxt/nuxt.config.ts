@@ -5,14 +5,12 @@ export default defineNuxtConfig({
     imports: {autoImport: true},
     modules: [
         "vuetify-nuxt-module",
-        // "@sidebase/nuxt-auth",
         "@pinia/nuxt"
     ],
-    // auth: { globalAppMiddleware: true, },
     devServer: {
-        url: "http://localhost:3000",
         host: "192.168.1.3"
     },
+
     runtimeConfig: {
         google_secret: process.env.NUXT_GOOGLE_SECRET,
         git_secret: process.env.NUXT_GITHUB_SECRET,

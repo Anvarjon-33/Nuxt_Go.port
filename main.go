@@ -2,31 +2,40 @@ package main
 
 import (
 	"Anvarjon-33/Nuxt_Go.port/db"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"time"
+	"strings"
 )
 
+var par = make(chan map[string]string)
+
 func main() {
-	start := time.Now()
-	res, _ := db.GetUser()
-	fmt.Println("time for tasks: ", start.Sub(time.Now()))
 	r := gin.Default()
 	r.Use(CORSMiddleware())
-	r.POST("/login", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": res,
-		})
-	})
-	r.POST("/", func(c *gin.Context) {
-		res, err := db.GetUser()
-		if err != nil {
-			panic(err)
+
+	r.GET("/data", func(c *gin.Context) {
+		var res = make(map[string]string)
+		params := c.Request.URL.Query()
+		for key, val := range params {
+			res[key] = strings.Join(val, "")
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"message": res,
-		})
+		par <- res
+	})
+
+	r.POST("/data", func(c *gin.Context) {
+		select {
+		case p := <-par:
+			_ = p
+			res, _ := db.GetUser_()
+			c.JSON(http.StatusOK, gin.H{
+				"message": res,
+			})
+		default:
+			res, _ := db.GetUser_()
+			c.JSON(http.StatusOK, gin.H{
+				"message": res,
+			})
+		}
 	})
 	r.Run("192.168.1.3:2222") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
