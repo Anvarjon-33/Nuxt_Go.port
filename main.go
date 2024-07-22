@@ -13,7 +13,6 @@ var par = make(chan map[string]string, 1)
 func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
-
 	//r.GET("/data", func(c *gin.Context) {
 	//	var res = make(map[string]string)
 	//	params := c.Request.URL.Query()
