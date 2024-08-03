@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Anvarjon-33/Nuxt_Go.port/api/auth"
 	"Anvarjon-33/Nuxt_Go.port/db"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -13,15 +14,16 @@ var par = make(chan map[string]string, 1)
 func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
-	//r.GET("/data", func(c *gin.Context) {
-	//	var res = make(map[string]string)
-	//	params := c.Request.URL.Query()
-	//	for key, val := range params {
-	//		res[key] = strings.Join(val, "")
-	//	}
-	//	par <- res
-	//})
+	r.GET("/data", func(c *gin.Context) {
+		var res = make(map[string]string)
+		params := c.Request.URL.Query()
+		for key, val := range params {
+			res[key] = strings.Join(val, "")
+		}
+		par <- res
+	})
 
+	auth.Auth(r)
 	r.POST("/data", func(c *gin.Context) {
 		var res = make(map[string]string)
 		params := c.Request.URL.Query()
@@ -47,6 +49,19 @@ func main() {
 			})
 		}
 	})
+	// ###########
+	/*
+		r.POST("/postman", func(c *gin.Context) {
+			post, err := io.ReadAll(c.Request.Body)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println(string(post))
+			c.JSON(http.StatusOK, gin.H{
+				"message": string(post),
+			})
+		})
+	*/
 	r.Run("192.168.1.3:2222") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
@@ -56,7 +71,6 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT")
-
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
 			return

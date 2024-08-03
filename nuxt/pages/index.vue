@@ -41,6 +41,9 @@
 </template>
 
 <script lang="ts" setup>
+useSeoMeta({
+  ogImage: '~/assets/favicon.ico'
+})
 const name = ref()
 const last_name = ref()
 const g = gl()
