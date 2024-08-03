@@ -18,7 +18,8 @@
                 You can register via Social Network
               </v-card-subtitle>
               <v-card-text>
-                <v-form action="" submit.prevent="register">
+                <v-form submit.prevent="register">
+
                   <v-text-field
                       v-model="form.name"
                       :rules="rule.text_required"
@@ -27,15 +28,26 @@
                       type="text"
                   >
                   </v-text-field>
+
+
                   <v-text-field
                       v-model="form.last_name" :rules="rule.text_required" placeholder="last_name" type="text"
                   ></v-text-field>
-                  <v-text-field v-model="form.email" :rules="rule.email" placeholder="email" type="text"></v-text-field>
-                  <v-text-field v-model="form.password" placeholder="password" type="text"></v-text-field>
+
+                  <v-text-field
+                      v-model="form.email" :rules="rule.email" placeholder="email" type="text"
+                  ></v-text-field>
+
+                  <v-text-field
+                      v-model="form.password" placeholder="password" type="password"
+                  ></v-text-field>
+
                   <v-text-field
                       v-model="form.confirm_password"
-                      :rules="rule.password" placeholder="confirm_password" type="text"
+                      :rules="rule.password"
+                      placeholder="confirm_password" type="password"
                   ></v-text-field>
+
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -58,6 +70,8 @@ const form = reactive({
   password: "kadrkadr",
   confirm_password: "kadrkadr",
 })
+
+const valid = ref(false)
 
 const deny = () => {
   let res = confirm("All data will be lost !")
@@ -84,16 +98,16 @@ const register_user = async () => {
 
 const rule = reactive({
   text_required: [
-    (val: string) => {
-      if (val.length > 2) return true;
-      return "The field is required !"
-    }
+    (val: string) => !!val || 'Required !',
+    (val: string) => val.length > 2 || 'Character length must be at last 2 !',
   ],
   email: [
-    (val: string) => true
+    (val: string) => !!val || 'Field Required !',
+    (val: string) => val.match(/[a-zA-Z0-9.*%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}/g) || 'Email no valid !'
   ],
   password: [
-    (val: string) => true
+    (val: string) => !!val || 'Enter Confirmation for password',
+    (val: string) => val === form.password || 'Password mismatch',
   ],
 })
 </script>
