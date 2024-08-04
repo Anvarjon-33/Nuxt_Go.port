@@ -1,12 +1,11 @@
-<template>
-</template>
+import defineNuxtConfig from '../../nuxt.config';
+<template></template>
 
-<script lang="ts" setup>
+<script setup>
 definePageMeta({
   layout: "default",
-  middleware: 'auth'
-})
+  middleware: "auth",
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
