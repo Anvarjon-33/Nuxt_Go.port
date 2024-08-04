@@ -13,22 +13,38 @@
         <v-col class="" cols="12">
           <v-row class="no-gutters">
             <v-col cols="6">
-              <v-btn block color="primary" prepend-icon="mdi-google"
+              <v-btn
+                @click="register_user('google')"
+                block
+                color="primary"
+                prepend-icon="mdi-google"
                 >google</v-btn
               >
             </v-col>
             <v-col cols="6">
-              <v-btn block color="secondary" prepend-icon="mdi-github"
+              <v-btn
+                @click="register_user('github')"
+                block
+                color="secondary"
+                prepend-icon="mdi-github"
                 >github
               </v-btn>
             </v-col>
             <v-col cols="6">
-              <v-btn block color="green-lighten-1" prepend-icon="mdi-aws"
+              <v-btn
+                @click="register_user('yandex')"
+                block
+                color="green-lighten-1"
+                prepend-icon="mdi-aws"
                 >yandex
               </v-btn>
             </v-col>
             <v-col cols="6">
-              <v-btn block color="blue-lighten-2" prepend-icon="mdi-amazon"
+              <v-btn
+                @click="register_user('amazon')"
+                block
+                color="blue-lighten-2"
+                prepend-icon="mdi-amazon"
                 >amazon
               </v-btn>
             </v-col>
@@ -45,8 +61,8 @@
         </v-col>
 
         <v-col cols="12" v-if="show.account">
-          <v-sheet class="pa-10 bg-brown-lighten-4">
-            <v-card class="bg-brown-lighten-5">
+          <v-sheet class="pb-2 bg-brown-lighten-4">
+            <v-card class="bg-brown-lighten-5 pb-3">
               <v-card-title> Register via Email:</v-card-title>
               <v-card-subtitle>
                 You can register via Social Network
