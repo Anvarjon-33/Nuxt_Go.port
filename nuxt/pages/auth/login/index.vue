@@ -9,19 +9,19 @@
         xl="2"
         xs="12"
     >
-      <v-row class="border rounded-lg">
-        <v-col cols="12">
+      <v-row class="border rounded-lg bg-brown-lighten-4">
+        <v-col class="" cols="12">
           <v-btn block color="primary" prepend-icon="mdi-google">google</v-btn>
         </v-col>
-        <v-col cols="12">
+        <v-col class="" cols="12">
           <v-btn
               block color="secondary" prepend-icon="mdi-github"
           >github
           </v-btn>
         </v-col>
         <v-col cols="12">
-          <v-sheet class="pt-3 px-10">
-            <v-card>
+          <v-sheet class="pa-10  bg-brown-lighten-4">
+            <v-card class="bg-brown-lighten-5">
               <v-card-title> Register via Email:</v-card-title>
               <v-card-subtitle>
                 You can register via Social Network
@@ -54,21 +54,26 @@
                   ></v-text-field>
                   <v-text-field
                       v-model="form.password"
+                      :append-inner-icon="show.password ? 'mdi-eye':'mdi-eye-off'"
+                      :type="show.password ? 'text':'password'"
                       placeholder="password"
-                      type="password"
-                  ></v-text-field>
+                      @click:append-inner="show.password=!show.password"
+                  >
+                  </v-text-field>
                   <v-text-field
                       v-model="form.confirm_password"
-                      :append-inner-icon="fields?.items?.[4]?.isValid ? '':'mdi-alert-outline'"
+                      :append-icon="fields?.items?.[4]?.isValid ? '':'mdi-alert-outline'"
+                      :append-inner-icon="show.confirm ? 'mdi-eye':'mdi-eye-off'"
                       :rules="rule.password"
+                      :type="show.confirm ? 'text':'password'"
                       placeholder="confirm_password"
-                      type="password"
+                      @click:append-inner="show.confirm=!show.confirm"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="green" @click="register_user">send</v-btn>
-                <v-btn color="warning" @click="deny">deny</v-btn>
+                <v-btn color="green" variant="elevated" @click="register_user">send</v-btn>
+                <v-btn class="ms-7" color="warning" variant="tonal" @click="deny">deny</v-btn>
               </v-card-actions>
             </v-card>
           </v-sheet>
@@ -79,6 +84,10 @@
 </template>
 
 <script setup>
+const show = reactive({
+  password: false,
+  confirm: false
+})
 const fields = ref()
 
 const form = reactive({
