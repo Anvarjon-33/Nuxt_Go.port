@@ -1,26 +1,51 @@
 <template>
   <v-row>
     <v-col
-        class="mx-auto pa-3 ma-3"
-        cols="12"
-        lg="4"
-        md="6"
-        sm="8"
-        xl="2"
-        xs="12"
+      class="mx-auto pa-3 ma-3"
+      cols="12"
+      lg="4"
+      md="6"
+      sm="8"
+      xl="2"
+      xs="12"
     >
       <v-row class="border rounded-lg bg-brown-lighten-4">
         <v-col class="" cols="12">
-          <v-btn block color="primary" prepend-icon="mdi-google">google</v-btn>
+          <v-row class="no-gutters">
+            <v-col cols="6">
+              <v-btn block color="primary" prepend-icon="mdi-google"
+                >google</v-btn
+              >
+            </v-col>
+            <v-col cols="6">
+              <v-btn block color="secondary" prepend-icon="mdi-github"
+                >github
+              </v-btn>
+            </v-col>
+            <v-col cols="6">
+              <v-btn block color="green-lighten-1" prepend-icon="mdi-aws"
+                >yandex
+              </v-btn>
+            </v-col>
+            <v-col cols="6">
+              <v-btn block color="blue-lighten-2" prepend-icon="mdi-amazon"
+                >amazon
+              </v-btn>
+            </v-col>
+            <v-col cols="12">
+              <v-btn
+                block
+                color="brown-darken-1"
+                prepend-icon="mdi-account"
+                @click="show.account = !show.account"
+                >create own
+              </v-btn>
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col class="" cols="12">
-          <v-btn
-              block color="secondary" prepend-icon="mdi-github"
-          >github
-          </v-btn>
-        </v-col>
-        <v-col cols="12">
-          <v-sheet class="pa-10  bg-brown-lighten-4">
+
+        <v-col cols="12" v-if="show.account">
+          <v-sheet class="pa-10 bg-brown-lighten-4">
             <v-card class="bg-brown-lighten-5">
               <v-card-title> Register via Email:</v-card-title>
               <v-card-subtitle>
@@ -29,51 +54,71 @@
               <v-card-text>
                 <v-form ref="fields" submit.prevent="register_user">
                   <v-text-field
-                      v-model="form.name"
-                      :append-inner-icon="fields?.items?.[0]?.isValid ? '':'mdi-alert-outline'"
-                      :rules="rule.text_required"
-                      autofocus
-                      placeholder="name"
-                      type="text"
+                    v-model="form.name"
+                    :append-inner-icon="
+                      fields?.items?.[0]?.isValid ? '' : 'mdi-alert-outline'
+                    "
+                    :rules="rule.text_required"
+                    autofocus
+                    placeholder="name"
+                    type="text"
                   >
                   </v-text-field>
                   <v-text-field
-                      v-model="form.last_name"
-                      :append-inner-icon="fields?.items?.[1]?.isValid ? '':'mdi-alert-outline'"
-                      :rules="rule.text_required"
-                      placeholder="last_name"
-                      type="text"
+                    v-model="form.last_name"
+                    :append-inner-icon="
+                      fields?.items?.[1]?.isValid ? '' : 'mdi-alert-outline'
+                    "
+                    :rules="rule.text_required"
+                    placeholder="last_name"
+                    type="text"
                   >
                   </v-text-field>
                   <v-text-field
-                      v-model="form.email"
-                      :append-inner-icon="fields?.items?.[2]?.isValid ? '':'mdi-alert-outline'"
-                      :rules="rule.email"
-                      placeholder="email"
-                      type="text"
+                    v-model="form.email"
+                    :append-inner-icon="
+                      fields?.items?.[2]?.isValid ? '' : 'mdi-alert-outline'
+                    "
+                    :rules="rule.email"
+                    placeholder="email"
+                    type="text"
                   ></v-text-field>
                   <v-text-field
-                      v-model="form.password"
-                      :append-inner-icon="show.password ? 'mdi-eye':'mdi-eye-off'"
-                      :type="show.password ? 'text':'password'"
-                      placeholder="password"
-                      @click:append-inner="show.password=!show.password"
+                    v-model="form.password"
+                    :append-inner-icon="
+                      show.password ? 'mdi-eye' : 'mdi-eye-off'
+                    "
+                    :type="show.password ? 'text' : 'password'"
+                    placeholder="password"
+                    @click:append-inner="show.password = !show.password"
                   >
                   </v-text-field>
                   <v-text-field
-                      v-model="form.confirm_password"
-                      :append-icon="fields?.items?.[4]?.isValid ? '':'mdi-alert-outline'"
-                      :append-inner-icon="show.confirm ? 'mdi-eye':'mdi-eye-off'"
-                      :rules="rule.password"
-                      :type="show.confirm ? 'text':'password'"
-                      placeholder="confirm_password"
-                      @click:append-inner="show.confirm=!show.confirm"
+                    v-model="form.confirm_password"
+                    :append-icon="
+                      fields?.items?.[4]?.isValid ? '' : 'mdi-alert-outline'
+                    "
+                    :append-inner-icon="
+                      show.confirm ? 'mdi-eye' : 'mdi-eye-off'
+                    "
+                    :rules="rule.password"
+                    :type="show.confirm ? 'text' : 'password'"
+                    placeholder="confirm_password"
+                    @click:append-inner="show.confirm = !show.confirm"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn color="green" variant="elevated" @click="register_user">send</v-btn>
-                <v-btn class="ms-7" color="warning" variant="tonal" @click="deny">deny</v-btn>
+                <v-btn color="green" variant="elevated" @click="register_user"
+                  >send</v-btn
+                >
+                <v-btn
+                  class="ms-7"
+                  color="warning"
+                  variant="tonal"
+                  @click="deny"
+                  >deny</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-sheet>
@@ -86,9 +131,10 @@
 <script setup>
 const show = reactive({
   password: false,
-  confirm: false
-})
-const fields = ref()
+  confirm: false,
+  account: false,
+});
+const fields = ref();
 
 const form = reactive({
   name: "Anvarjon",
@@ -109,7 +155,7 @@ const deny = () => {
 const register_user = async () => {
   for (let props in form) {
     if (!form[props]) return;
-    const {signUp} = useAuth();
+    const { signUp } = useAuth();
     let res = await signUp({
       email: form.email,
       password: form.password,
@@ -127,8 +173,8 @@ const rule = reactive({
   email: [
     (val) => !!val || "Field Required !",
     (val) =>
-        !!val.match(/[a-zA-Z0-9.*%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}/g) ||
-        "Email no valid !",
+      !!val.match(/[a-zA-Z0-9.*%±]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}/g) ||
+      "Email no valid !",
   ],
   password: [
     (val) => !!val || "Enter Confirmation for password",
