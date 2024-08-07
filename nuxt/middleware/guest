@@ -1,0 +1,7 @@
+export default defineNuxtRouteMiddleware((to, from) => {
+    const {status} = useAuthState()
+    if (status.value === "authenticated") {
+        console.log(from, to)
+        navigateTo("/protected", {external: true})
+    }
+})
