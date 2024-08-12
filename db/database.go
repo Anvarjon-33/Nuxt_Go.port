@@ -1,13 +1,17 @@
 package db
 
 import (
-	"Anvarjon-33/Nuxt_Go.port/classic"
+	"Anvarjon-33/Nuxt_Go/classic"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gofor-little/env"
+	"github.com/redis/go-redis/v9"
 )
 
 var db *sql.DB
+
+var _redis, _ = redis.ParseURL("redis://127.0.0.1:6379")
+var Redis = redis.NewClient(_redis)
 
 func init() {
 	err := env.Load(".env")

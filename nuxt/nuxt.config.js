@@ -9,7 +9,7 @@ export default defineNuxtConfig({
         "vuetify-nuxt-module",
         "@pinia/nuxt",
         // @ts-ignore
-        ["@sidebase/nuxt-auth"],
+        ["@sidebase/nuxt-auth"]
     ],
     devServer: {
         host: "http://" + process.env.NUXT_HOST
@@ -20,7 +20,7 @@ export default defineNuxtConfig({
         git_secret: process.env.NUXT_GITHUB_SECRET,
         public: {
             git_id: process.env.NUXT_GITHUB_ID,
-            google_id: process.env.NUXT_GOOGLE_ID,
+            google_id: process.env.NUXT_GOOGLE_ID
         }
     },
     auth: {
@@ -32,17 +32,17 @@ export default defineNuxtConfig({
                 getSession: {path: 'session', method: 'get'},
                 signOut: {path: 'logout', method: 'post'},
                 signUp: {path: 'register', method: 'post'},
-                refresh: {path: 'refresh-token', method: 'post'},
+                refresh: {path: 'refresh-token', method: 'post'}
             },
             pages: {
-                login: "/auth/login",
+                login: "/auth/login"
             },
             token: {
                 cookieName: "auth.token",
                 signInResponseTokenPointer: "/token",
                 headerName: "Authorization",
-                type: "Bearer",
+                type: "Bearer"
             }
-        },
+        }
     }
 })

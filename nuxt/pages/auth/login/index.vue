@@ -14,37 +14,37 @@
           <v-row class="no-gutters">
             <v-col cols="6">
               <v-btn
-                @click="register_user('google')"
                 block
                 color="primary"
                 prepend-icon="mdi-google"
-                >google</v-btn
-              >
+                @click="register_user('google')"
+                >google
+              </v-btn>
             </v-col>
             <v-col cols="6">
               <v-btn
-                @click="register_user('github')"
                 block
                 color="secondary"
                 prepend-icon="mdi-github"
+                @click="register_user('github')"
                 >github
               </v-btn>
             </v-col>
             <v-col cols="6">
               <v-btn
-                @click="register_user('yandex')"
                 block
                 color="green-lighten-1"
                 prepend-icon="mdi-aws"
+                @click="register_user('yandex')"
                 >yandex
               </v-btn>
             </v-col>
             <v-col cols="6">
               <v-btn
-                @click="register_user('amazon')"
                 block
                 color="blue-lighten-2"
                 prepend-icon="mdi-amazon"
+                @click="register_user('amazon')"
                 >amazon
               </v-btn>
             </v-col>
@@ -59,8 +59,7 @@
             </v-col>
           </v-row>
         </v-col>
-
-        <v-col cols="12" v-if="show.account">
+        <v-col v-if="show.account" cols="12">
           <v-sheet class="pb-2 bg-brown-lighten-4">
             <v-card class="bg-brown-lighten-5 pb-3">
               <v-card-title> Register via Email:</v-card-title>
@@ -126,15 +125,15 @@
               </v-card-text>
               <v-card-actions>
                 <v-btn color="green" variant="elevated" @click="register_user"
-                  >send</v-btn
-                >
+                  >send
+                </v-btn>
                 <v-btn
                   class="ms-7"
                   color="warning"
                   variant="tonal"
                   @click="deny"
-                  >deny</v-btn
-                >
+                  >deny
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-sheet>
