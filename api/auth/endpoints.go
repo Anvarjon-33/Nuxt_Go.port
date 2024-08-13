@@ -2,8 +2,8 @@ package auth
 
 import (
 	"Anvarjon-33/Nuxt_Go/app/utils"
+	"Anvarjon-33/Nuxt_Go/middleware"
 	"Anvarjon-33/Nuxt_Go/model"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"net/http"
@@ -16,7 +16,7 @@ func Auth(r *gin.Engine) {
 	{
 		api.POST("/login", func(context *gin.Context) {
 			context.JSON(http.StatusOK, gin.H{
-				"token": "",
+				"token": "sdojkfglkdjglkgnmdfnbjfhdjlkbjlkfdjldvndf.bvfgb5f4b5",
 			})
 		})
 		api.POST("/logout", func(context *gin.Context) {
@@ -48,21 +48,11 @@ func Auth(r *gin.Engine) {
 					"message": "Email already ahs been taken",
 				})
 			}
-
 		})
 		api.GET("/session", func(context *gin.Context) {
-			sess := context.Request.Cookies()
-			auth := context.Request.Header.Get("Authorization")
-
-			fmt.Println("SEESION : ", sess)
-			fmt.Println("AUTHORIZATION : ", auth)
-
-			context.JSON(http.StatusOK, gin.H{
-				"message": "Something is wrong",
+			context.JSON(http.StatusUnauthorized, gin.H{
+				"message": "No Auth",
 			})
-			//context.JSON(http.StatusOK, gin.H{
-			//	"message": "/sesion String MEssage",
-			//})
-		})
+		}, middleware.Debugger())
 	}
 }

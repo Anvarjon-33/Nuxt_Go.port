@@ -24,6 +24,7 @@ function eraseCookie(name) {
 }
 
 addEventListener("load", e => {
+    console.log("LOAD")
 })
 
 addEventListener("unload", e => {

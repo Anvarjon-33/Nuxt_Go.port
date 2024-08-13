@@ -2,7 +2,7 @@ export default defineNuxtConfig({
     app: {
         head: {
             script: [
-                { tagPosition: 'bodyClose', src: 'app.js' },
+                {tagPosition: 'bodyClose', src: '/app.js', textContent: "text/javascript"},
             ]
         }
     },

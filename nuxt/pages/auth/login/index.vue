@@ -169,17 +169,19 @@ const deny = () => {
 };
 
 const register_user = async () => {
-  try {
-    let res = await $fetch("http://192.168.1.3:2222/csrf-header")
-    for (let key in res) {
-      useCookie(key, {
-        sameSite: "lax",
-        expires: new Date(Date.now() + 1000 * 30)
-      }).value = res[key]
-    }
-  } catch (er) {
-    console.log('something went wrong', er)
-  }
+  // try {
+  //   let res = await $fetch("http://192.168.1.3:2222/csrf-header", {
+  //     headers: {"X-Requested-With": "XMLHttpRequest"}
+  //   })
+  //   for (let key in res) {
+  //     useCookie("CSRF-Token", {
+  //       sameSite: "lax",
+  //       expires: new Date(Date.now() + 1000 * 30)
+  //     }).value = res[key]
+  //   }
+  // } catch (er) {
+  //   console.log('something went wrong', er)
+  // }
 
   for (let props in form) {
     if (!form[props]) return;

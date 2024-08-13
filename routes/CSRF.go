@@ -2,16 +2,17 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 var r = gin.Default()
 
-func Auth() gin.HandlerFunc {
-
+func Csrf() gin.HandlerFunc {
 	return func(context *gin.Context) {
-		context.JSON(http.StatusOK, gin.H{
-			"try": "Example",
-		})
+
+		context.Writer.Header().Set("X-CSRF-Token", "fdvfsdvfdvlihekjllfkjewrfhlkerwjglerhl")
+
+		//context.JSON(http.StatusOK, gin.H{
+		//	"token": "fdvfsdvfdvlihekjllfkjewrfhlkerwjglerhl",
+		//})
 	}
 }

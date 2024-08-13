@@ -2,8 +2,11 @@ export const gl = defineStore("global_POST_data", {
     state: () => ({
         data: {} as any,
         params: {
-            method: 'post',
-            url: "/"
+            method: 'get',
+            url: "/",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
         }
     }),
     actions: {
@@ -11,7 +14,7 @@ export const gl = defineStore("global_POST_data", {
             if (url.slice(0, 4) != 'http') {
                 url = "http://192.168.1.3:2222" + url;
             }
-            this.data = await $fetch(url, _params || this.params)
+            this.data = await $fetch(url, {..._params, ...this.params,})
         }
     },
     getters: {}
