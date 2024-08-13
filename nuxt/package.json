@@ -16,6 +16,8 @@
     "@vee-validate/nuxt": "^4.13.2",
     "next-auth": "^4.24.7",
     "nuxt": "^3.12.3",
+    "nuxt-helm": "^0.0.2",
+    "nuxt-security": "^2.0.0-rc.9",
     "vue": "latest",
     "vuetify-nuxt-module": "^0.15.1",
     "yup": "^1.4.0"

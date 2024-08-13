@@ -36,9 +36,11 @@ func Debugger() gin.HandlerFunc {
 		sess := c.Request.Cookies()
 		auth := c.Request.Header.Get("Authorization")
 		csrf := c.Request.Header.Get("X-CSRF-Token")
+		csrf2 := c.Request.Header.Get("CSRF-Token")
 
 		fmt.Println("SESS : ", sess)
 		fmt.Println("AUTH : ", auth)
 		fmt.Println("CSRF : ", csrf)
+		fmt.Println("CSRF2 : ", csrf2)
 	}
 }

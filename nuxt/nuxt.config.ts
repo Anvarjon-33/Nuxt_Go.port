@@ -9,15 +9,17 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     devtools: {enabled: false},
     imports: {
-        autoImport:
-            true
+        autoImport: true,
     },
-    modules: [
-        "vuetify-nuxt-module",
-        "@pinia/nuxt",
-        // @ts-ignore
-        ["@sidebase/nuxt-auth"]
-    ],
+    modules: ["vuetify-nuxt-module", "@pinia/nuxt", "@sidebase/nuxt-auth", "nuxt-helm", "nuxt-security"],
+    security: {
+        corsHandler: {
+            allowHeaders: "*",
+            credentials: true,
+            exposeHeaders: "*",
+            origin: "http://192.168.1.3/"
+        }
+    },
     devServer: {
         host: "http://" + process.env.NUXT_HOST
     },
