@@ -3,6 +3,7 @@ package main
 import (
 	"Anvarjon-33/Nuxt_Go/api/auth"
 	"Anvarjon-33/Nuxt_Go/db"
+	"Anvarjon-33/Nuxt_Go/middleware"
 	"Anvarjon-33/Nuxt_Go/routes"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -28,10 +29,9 @@ func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	r.GET("/csrf-header", routes.Auth())
+	r.GET("/csrf-header", routes.Csrf())
 
-	r.GET("/data", func(c *gin.Context) {
-
+	r.GET("/data", routes.Csrf(), func(c *gin.Context) {
 		var res = make(map[string]string)
 		params := c.Request.URL.Query()
 		for key, val := range params {
@@ -55,7 +55,8 @@ func main() {
 				"message": res,
 			})
 		}
-	})
+	}, middleware.Debugger())
+
 	auth.Auth(r)
 	r.Run("192.168.1.3:2222") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
@@ -65,7 +66,9 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Writer.Header().Set("Access-Control-Expose-Headers", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, HEAD")
+		c.Writer.Header().Set("X-Requested-With", "XMLHttpRequest")
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
 			return
