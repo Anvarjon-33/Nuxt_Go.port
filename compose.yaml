@@ -1,0 +1,44 @@
+networks:
+  g-nuxt:
+    driver: bridge
+services:
+  #NGINX
+  nginx:
+    build:
+      context: ./nuxt
+      dockerfile: Dockerfile
+    container_name: nginx
+    restart: unless-stopped
+    environment:
+      HOST: "192.168.1.3"
+    tty: true
+    volumes:
+      - ./nuxt/dist/:/usr/share/nginx/html
+    networks:
+      - g-nuxt
+    ports:
+      - "80:80"
+    develop:
+      watch:
+        # sync static content
+        - path: ./nuxt
+          action: sync
+          target: /usr/share/nginx/html
+          ignore:
+            - node_modules/
+  #MYSQL
+#  mysql:
+#    image: mysql
+#    container_name: mysql
+#    restart: unless-stopped
+#    environment:
+#      MYSQL_ROOT_PASSWORD: kadr1988
+#    ports:
+#      - 3306:3306
+#    expose:
+#      - 3306:3306
+#    volumes:
+#      - /var/lib/mysql:/var/lib/mysql
+#    networks:
+#      - g-nuxt
+#
