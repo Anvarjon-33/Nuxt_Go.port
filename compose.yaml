@@ -9,8 +9,6 @@ services:
       dockerfile: Dockerfile
     container_name: nginx
     restart: unless-stopped
-    environment:
-      HOST: "192.168.1.3"
     tty: true
     volumes:
       - ./nuxt/dist/:/usr/share/nginx/html

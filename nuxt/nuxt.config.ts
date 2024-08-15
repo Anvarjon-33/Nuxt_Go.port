@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     imports: {
         autoImport: true,
     },
-    modules: ["vuetify-nuxt-module", "@pinia/nuxt", "@sidebase/nuxt-auth", "nuxt-helm", "nuxt-security"],
+    modules: ["vuetify-nuxt-module", "@pinia/nuxt", "@sidebase/nuxt-auth"],
     security: {
         corsHandler: {
             allowHeaders: "*",

@@ -23,13 +23,11 @@ function eraseCookie(name) {
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-<<<<<<< HEAD
 addEventListener("load", async e => {
+})
 
-=======
 addEventListener("load", e => {
     console.log("LOAD")
->>>>>>> ce8826e11019aba7e1cfd44514dda7482209e372
 })
 
 addEventListener("unload", e => {
