@@ -17,7 +17,7 @@
       <template #data="{ data }">
         <v-row>
           <v-col
-              v-for="(val, key) in data?.['message']"
+              v-for="(val, key) in data['message']"
               :key="key"
               class="height-full"
               cols="12"
@@ -71,6 +71,14 @@ watch([name, last_name], () => {
     },
   });
 });
+
+// try {
+//   const {data} = await $fetch("/data")
+//   console.log(data)
+// } catch (err) {
+//   console.log(err)
+// }
+
 </script>
 
 <style scoped></style>

@@ -23,7 +23,6 @@ func init() {
 	mode = os.Getenv("MODE")
 	par = make(chan map[string]string, 1)
 }
-
 func main() {
 	gin.ForceConsoleColor()
 	r := gin.Default()
@@ -51,14 +50,13 @@ func main() {
 		default:
 			fmt.Println("Default Response !")
 			res, _ := db.GetUser_()
-			c.JSON(http.StatusOK, gin.H{
+			c.JSON(http.StatusAccepted, gin.H{
 				"message": res,
 			})
 		}
 	}, middleware.Debugger())
-
 	auth.Auth(r)
-	r.Run("192.168.1.3:2222") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r.Run(":2222") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 
 func CORSMiddleware() gin.HandlerFunc {
