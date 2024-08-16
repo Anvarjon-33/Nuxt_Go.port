@@ -74,3 +74,10 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+//while true;
+//do
+//nc -q 1 192.168.1.3 1213;
+//nc -q 1 192.168.1.3 1212;
+//nc -q 1 192.168.1.3 1234;
+//done

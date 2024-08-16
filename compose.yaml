@@ -1,6 +1,6 @@
 networks:
   g-nuxt:
-    driver: bridge
+    driver: local
 services:
   #NGINX
   nginx:
