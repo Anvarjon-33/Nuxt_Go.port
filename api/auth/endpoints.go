@@ -2,6 +2,7 @@ package auth
 
 import (
 	"Anvarjon-33/Nuxt_Go/app/utils"
+	"Anvarjon-33/Nuxt_Go/db"
 	"Anvarjon-33/Nuxt_Go/middleware"
 	"Anvarjon-33/Nuxt_Go/model"
 	"github.com/gin-gonic/gin"
@@ -33,14 +34,14 @@ func Auth(r *gin.Engine) {
 			var user *model.AuthUser
 			context.Bind(&user)
 
-			err := model.DB.Where(&model.AuthUser{Email: user.Email}).First(&user).Error
+			err := db.DB.Where(&model.AuthUser{Email: user.Email}).First(&user).Error
 			if err != nil {
 				newUUID, _ := uuid.NewUUID()
 				h, err := utils.HashPassword(user.Password)
 				if err != nil {
 					panic(err)
 				}
-				model.DB.Create(&model.AuthUser{
+				db.DB.Create(&model.AuthUser{
 					ID: newUUID, Name: user.Name, Email: user.Email, Password: h,
 				})
 			} else {

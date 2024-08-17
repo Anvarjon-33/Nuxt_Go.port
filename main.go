@@ -20,10 +20,11 @@ var (
 
 func init() {
 	secret = os.Getenv("SECRET")
-	mode = os.Getenv("MODE")
 	par = make(chan map[string]string, 1)
 }
+
 func main() {
+
 	gin.ForceConsoleColor()
 	r := gin.Default()
 	r.Use(CORSMiddleware())
