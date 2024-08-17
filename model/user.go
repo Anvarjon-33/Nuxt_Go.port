@@ -1,6 +1,7 @@
 package model
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -16,14 +17,18 @@ type AuthUser struct {
 	Token    string    `gorm:"access_token" json:"auth.token" form:"password"`
 }
 
+var db_url string = "root:" + os.Getenv("MYSQL_ROOT_PASSWORD") + "@tcp(" + os.Getenv("MYSQL_HOST") + ")/" + os.Getenv("MYSQL_DATABASE")
+
 type Auth struct {
 }
 
-var DB, err = gorm.Open(mysql.Open(os.Getenv("DB_URL")), &gorm.Config{})
+var DB, err = gorm.Open(mysql.Open(os.Getenv(db_url)), &gorm.Config{})
 
 func init() {
+	fmt.Println("-------------------------------------->", db_url)
 	err := DB.AutoMigrate(&AuthUser{})
 	if err != nil {
 		panic(err)
 	}
+
 }
